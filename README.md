@@ -40,7 +40,7 @@ Each IR sensor provides an analog output corresponding to surface reflectivity.
 | ENA       | GPIO 12 (PWM) | Motor A speed     |
 | ENB       | GPIO 13 (PWM) | Motor B speed     |
 
-#### Power Connections:
+### Power Connections:
 - L298N +12V / +Vs → Battery
 - GND shared between ESP32 and L298N
 
@@ -49,3 +49,39 @@ Each IR sensor provides an analog output corresponding to surface reflectivity.
 - Black line reflects less IR → lower analog value<br/>White surface reflects more IR → higher analog value
 - The ESP32 reads sensor values and determines the line position.
 - Motor speeds are adjusted using PWM to steer the robot.
+
+## ⚙️ Motor Control Logic
+### Forward Motion
+- Both motors rotate forward at equal speed
+### Left Turn
+- Left motor slows down
+- Right motor speeds up
+### Right Turn
+- Left motor speeds up
+- Right motor slows down
+#### Speed control is achieved using PWM signals on ENA and ENB pins
+
+## 🔄 PWM Configuration (ESP32)
+The ESP32 uses LEDC hardware PWM:
+  - Frequency: 1 kHz
+  - Resolution: 8-bit (0–255 duty cycle)<br/>
+<p>PWM allows smooth motor speed variation for accurate line tracking.</p>
+
+## 🛠️ Calibration
+Before running the robot:
+1. Place sensors on white surface → note readings
+2. Place sensors on black line → note readings
+3. Set a threshold value between black and white
+4. Use this threshold for line detection
+
+## ⚠️ Important Notes
+- Ensure common ground between all components
+- Avoid using ESP32 boot-sensitive pins (GPIO 0, 2, 15)
+- Use stable power supply for motors
+- Start with threshold-based logic before PID control
+
+## 🚀 Future Improvements
+- Implement PID control for smoother turns
+- Add junction detection
+- Display sensor values on Serial Monitor or OLED
+- Optimize speed dynamically based on curvature
