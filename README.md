@@ -1,10 +1,10 @@
 # LineController
 ## 📌 Project Overview
-<p>This project implements a Line Follower Robot using an ESP32 microcontroller, a 6-channel analog IR sensor array, and an L298N H-bridge motor driver.<br/>
+<p>This project implements a Line Follower Robot using an Arduino microcontroller, a 6-channel analog IR sensor array, and an L298N H-bridge motor driver.<br/>
 The robot detects a black line on a white surface and follows it autonomously by adjusting the speed and direction of two DC motors.</p>
 
 ## 🧩 Components Used
-- ESP32 Development Board
+- Arduino Development Board
 - 6-Channel Analog IR Sensor Array (or 8-channel as well)
 - L298N Dual H-Bridge Motor Driver
 - 2 × DC Motors
@@ -61,8 +61,8 @@ Each IR sensor provides an analog output corresponding to surface reflectivity.
 - Right motor slows down
 #### Speed control is achieved using PWM signals on ENA and ENB pins
 
-## 🔄 PWM Configuration (ESP32)
-The ESP32 uses LEDC hardware PWM:
+## 🔄 PWM Configuration (Arduino)
+The Arduino uses LEDC hardware PWM:
   - Frequency: 1 kHz
   - Resolution: 8-bit (0–255 duty cycle)<br/>
 <p>PWM allows smooth motor speed variation for accurate line tracking.</p>
